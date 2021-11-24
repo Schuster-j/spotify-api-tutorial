@@ -1,0 +1,16 @@
+setup
+einrichten-der-api
+libraries
+authorisierung
+playlist-analysen
+datenbeschaffung
+datenbereinigung
+explorative-datenanalyse
+erscheinungsjahre
+audioanalysen
+artist-analysen
+related-artists
+artist-vergleich
+album-analysen
+album-vergleich
+weitere-ressourcen
