@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Spotify API Einführung</title>
+  <meta name="description" content="Spotify API Einführung" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Spotify API Einführung" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Spotify API Einführung" />
+  
+  
+  
+
+<meta name="author" content="Autor: Jonathan Schuster   Kontakt: schuster.jonathan95@gmail.com" />
+
+
+<meta name="date" content="2021-11-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="">Spotify API Einführung </a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path=""><a href="#vorwort"><i class="fa fa-check"></i>Vorwort</a></li>
+<li class="chapter" data-level="1" data-path=""><a href="#setup"><i class="fa fa-check"></i><b>1</b> Setup</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#einrichten-der-api"><i class="fa fa-check"></i><b>1.1</b> Einrichten der API</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#libraries"><i class="fa fa-check"></i><b>1.2</b> Libraries</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#authorisierung"><i class="fa fa-check"></i><b>1.3</b> Authorisierung</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path=""><a href="#playlist-analysen"><i class="fa fa-check"></i><b>2</b> Playlist Analysen</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path=""><a href="#datenbeschaffung"><i class="fa fa-check"></i><b>2.1</b> Datenbeschaffung</a></li>
+<li class="chapter" data-level="2.2" data-path=""><a href="#datenbereinigung"><i class="fa fa-check"></i><b>2.2</b> Datenbereinigung</a></li>
+<li class="chapter" data-level="2.3" data-path=""><a href="#explorative-datenanalyse"><i class="fa fa-check"></i><b>2.3</b> Explorative Datenanalyse</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path=""><a href="#erscheinungsjahre"><i class="fa fa-check"></i><b>2.3.1</b> Erscheinungsjahre</a></li>
+<li class="chapter" data-level="2.3.2" data-path=""><a href="#audioanalysen"><i class="fa fa-check"></i><b>2.3.2</b> Audioanalysen</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path=""><a href="#artist-analysen"><i class="fa fa-check"></i><b>3</b> Artist Analysen</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path=""><a href="#related-artists"><i class="fa fa-check"></i><b>3.1</b> Related Artists</a></li>
+<li class="chapter" data-level="3.2" data-path=""><a href="#artist-vergleich"><i class="fa fa-check"></i><b>3.2</b> Artist Vergleich</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path=""><a href="#album-analysen"><i class="fa fa-check"></i><b>4</b> Album Analysen</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path=""><a href="#album-vergleich"><i class="fa fa-check"></i><b>4.1</b> Album Vergleich</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path=""><a href="#weitere-ressourcen"><i class="fa fa-check"></i><b>5</b> Weitere Ressourcen</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spotify API Einführung</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Spotify API Einführung</h1>
+<p class="author"><em>Autor: Jonathan Schuster <br> Kontakt: <a href="mailto:schuster.jonathan95@gmail.com" class="email">schuster.jonathan95@gmail.com</a></em></p>
+<p class="date"><em>2021-11-30</em></p>
+</div>
+<div id="vorwort" class="section level1 unnumbered">
+<h1>Vorwort</h1>
+<p>Dieses Tutorial zeigt am Beispiel von Spotify wie eine API genutzt werden kann, um Daten zu sammeln, zu analysieren und darzustellen. Erleichtert wird dies durch das Package <strong>spotifyr</strong>.</p>
+<br>
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xiMVPyLogn0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</center>
+<p><br>
+Hilfreiche Dokumentationen sind hier zu finden:</p>
+<ul>
+<li><a href="https://developer.spotify.com/documentation/web-api/reference/#/">Spotify API Dokumentation</a> - für Hintergrundinformationen, etc.</li>
+<li><a href="https://www.rdocumentation.org/packages/spotifyr/versions/2.2.1">Spotifyr Package Dokumentation</a> - für eine Übersicht der Funktionen, Befehle und Parameter.</li>
+</ul>
+
+</div>
+<div id="setup" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Setup</h1>
+<div id="einrichten-der-api" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Einrichten der API</h2>
+<p>Um sich mit der Spotify API verbinden zu können, werden eine sogenannte <strong>SPOTIFY_CLIENT_ID</strong> und ein <strong>SPOTIFY_CLIENT_SECRET</strong> benötigt, die Spotify im Portal für Entwickler (Spotify for Developers) zur Verfügung stellt. Mit der Identifikationsnummer (Client ID) und dem geheimen, persönlichen Clientschlüssel (Secret) wird der Zugriff auf die API von Spotify dem API-Nutzer und seiner Anwendung zugeordnet.</p>
+<p>Um ID und Clientschlüssel zu erhalten, müssen wir uns zunächst im Portal unter <a href="https://developer.spotify.com/dashboard/login" class="uri">https://developer.spotify.com/dashboard/login</a> anmelden und unseren Zugang einrichten. Dies ist entweder mit einem bereits bestehenden Spotify Konto möglich oder durch die Registrierung eines neuen (kostenfreien) Spotify Kontos.</p>
+<p>Nach erfolgreicher Anmeldung und Bestätigung der Vereinbarungen von Spotify erscheint ein Dashboard mit einer Übersicht über die von uns erstellten Apps im Portal. Da wir jedoch noch keine App erstellt haben, müssen wir dies nun über <strong>CREATE AN APP</strong> machen.
+<br>
+<br></p>
+<center>
+<img src="01-spotify.png" height="400" />
+</center>
+<p><br>
+Im sich dann öffnenden Fenster müssen wir der Anwendung einen Namen und eine Beschreibung geben, den Bestimmungen von Spotify zustimmen und die Anwendung anschließend erstellen.</p>
+<p>Damit erhalten wir ein weiteres Dashboard - diesmal für unsere neu erstellte Anwendung. Links über dem Dashboard finden wir so nun unsere <strong>Client ID</strong> und unter “Show Client Secret” unser <strong>Client Secret</strong>, also unseren persönlichen Zugangsschlüssel. Beide werden wir später in R einfügen müssen, um eine Verbindung zu unserer Anwendung und damit der Spotify API aufzubauen. Beide sind prinzipiell vertraulich zu behandeln, da mit ihnen praktisch jeder über die auf unser Konto registrierte Anwendung auf die Spotify API zugreifen kann und damit theoretisch auch Handlungen durchführen könnte, die den Nutzungsbedingungen von Spotify widersprechen.<br />
+<br></p>
+<center>
+<img src="02-spotify.png" height="400" />
+</center>
+<p><br>
+Bevor wir in R starten können, ist zudem noch eine weitere Einstellung nötig. Da es für bestimmte Funktionen und Anwendungen erforderlich ist, sich bei Spotify einzuloggen, muss eine Rückverbindung zwischen unserer Anwendung und der API hergestellt werden. Um diese einzurichten, müssen wir unter <strong>EDIT SETTINGS</strong> die Einstellungen öffnen.</p>
+<center>
+<img src="03-spotify.png" height="400" />
+</center>
+<p><br>
+Anschließend müssen wir in den Einstellungen die Adresse:</p>
+<center>
+<strong><a href="http://localhost:1410/" class="uri">http://localhost:1410/</a></strong>
+</center>
+<p><br>
+in das Feld <strong>Redirect URIs</strong> eingetragen. Anschließend sind die Einstellungen zu speichern.<br />
+<br></p>
+<center>
+<img src="04-spotify.png" height="700" />
+</center>
+</div>
+<div id="libraries" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Libraries</h2>
+<p>Nun können wir unser R-Projekt anlegen und die für unser Projekt notwendigen Libraries laden.</p>
+<p>Diese Libraries werden im Folgenden verwendet:</p>
+<ul>
+<li><strong>spotifyr</strong> - um die Verbindung zu unserer Spotify-Anwendung herzustellen und Daten über die im Package enthaltenen Funktionen zu erhalten<br />
+</li>
+<li><strong>ggplot2</strong> - um Diagramme anzufertigen und unsere Daten zu visualisieren<br />
+</li>
+<li><strong>dplyr</strong> - um unseren Datensatz gruppieren und filtern zu können<br />
+</li>
+<li><strong>purrr</strong> - wird in der Datenbereinigung verwendet</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spotifyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span></code></pre></div>
+</div>
+<div id="authorisierung" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Authorisierung</h2>
+<p>Nun können wir eine Verbindung zu unserer Anwendung und damit der Spotify API herstellen.
+Durch den folgenden Code und mit unserer Client ID sowie unserem Client Secret können wir unseren Zugang authorisieren.</p>
+<p>Beim ersten Ausführen der Funktion <strong>get_spotify_authorization_code()</strong> öffnet sich ein neues Fenster, in dem unser Zugriff bestätigt werden muss. Anschließend ist die Verbindung zu unserer Schnittstelle hergestellt.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">SPOTIFY_CLIENT_ID =</span> <span class="st">&quot;77f1d2129ed4430284eb4f31e9029b37&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">SPOTIFY_CLIENT_SECRET =</span> <span class="st">&quot;b336e77068ca481ab8c3bfb5fc06e37f&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">get_spotify_authorization_code</span>()</span></code></pre></div>
+<p>Nun ist die Verbindung hergestellt und wir können die Funktionen des <strong>spotifyr</strong> packages nutzen, um Daten zu sammeln.</p>
+<p><strong>Hinweis</strong>: Die Anwendung mit Client ID und Client Secret aus dem hier dargestellten Code wird voraussichtlich in näherer Zukunft aus Sicherheitsgründen abgeschaltet. Eigene ID und Secret sollten stattdessen verwendet werden.</p>
+
+</div>
+</div>
+<div id="playlist-analysen" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Playlist Analysen</h1>
+<p>Mit der nun hergestellten Verbindung können wir jegliche Funktionen des <strong>spotifyr</strong> Packages nutzen und beispielsweise Daten zu Künstlern, Alben, Playlisten oder Labels von Spotify abfragen. Eine Übersicht zu den möglichen Funktionen ist in der spotifyr Dokumentation zu finden:</p>
+<ul>
+<li><a href="https://www.rdocumentation.org/packages/spotifyr/versions/2.2.1">Spotifyr Package Dokumentation</a> - für eine Übersicht der Funktionen, Befehle und Parameter.</li>
+</ul>
+<p>Playlisten sind heutzutage das zentrale Element in der Art und Weise wie Musik konsumiert wird. Ganz egal ob es sich dabei um hauseigene, von Spotify kuratierte Playlisten oder um von anderen Nutzern oder uns selbst erstellte Playlisten handelt, spotifyr ermöglicht uns den Zugang zu unterschiedlichsten Daten über diese Playlisten.</p>
+<p>Diese Daten erhalten wir unter anderem durch folgende Funktionen:</p>
+<ul>
+<li><strong>get_category_playlists()</strong> - gibt eine Liste von Playlisten, mit einer bestimmten Kategorie getagged werden aus<br />
+</li>
+<li><strong>get_playlist_cover_image()</strong> - lädt das Cover-Bild einer Playlist<br />
+</li>
+<li><strong>get_playlist_tracks()</strong> - lädt Details zu den Songs in einer Playlist<br />
+</li>
+<li><strong>get_playlist_audio_features()</strong> - lädt Meta-Daten sowie Audio-Analyse-Daten der Songs einer Playlist</li>
+</ul>
+<div id="datenbeschaffung" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Datenbeschaffung</h2>
+<p>Um eine Playlist zu analysieren, benötigen wir nun lediglich die Playlist <strong>URI</strong>, die sich im Link einer jeden Playlist befindet und den Namen des Profils, welches die Playlist erstellt hat. Dazu können wir im Browser oder in der Spotify Desktop-App über die drei kleinen Punkte in der Menüleiste der Playlist zum Link gelangen.</p>
+<p><br></p>
+<center>
+<img src="05_spotify_playlist.png" height="300" />
+</center>
+<p><br></p>
+<p>Ich habe mich hier für die <strong>“Top 50 - Global”</strong> Playlist von Spotify entschieden. Der vollständige Link zur Playlist ist: <strong><a href="https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF?si=95eadb888fe644fc" class="uri">https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF?si=95eadb888fe644fc</a></strong></p>
+<p>Aus dieser URL kann ich nun die URI kopieren. Sie setzt sich aus den Zeichen ab <strong>playlist/</strong> bis zum <strong>?</strong> zusammen. Also aus der hier markierten Zeichenfolge:</p>
+<p>…open.spotify.com/playlist/<strong>37i9dQZEVXbMDoHDwVN2tF</strong>?si=95eadb888fe644fc</p>
+<p>Zusammen mit dem Namen des Profils welches die Playlist erstellt hat (in diesem Fall Spotify), können wir nun ein Dataframe mit dem Titel <strong>playlist_dataframe</strong> erstellen und die Daten der Playlist über die Funktion <strong>get_playlist_audio_features()</strong> abfragen.</p>
+<p><strong>Wichtiger Hinweis: Da wir mit der “Top 50 - Global” Playlist eine sich täglich aktualisierende Playlist ausgewählt haben, können die Ergebnisse und Songs beim “selber ausprobieren” von denen des Tutorials abweichen.</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>playlist_username <span class="ot">&lt;-</span> <span class="st">&quot;Spotify&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>playlist_uris <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;37i9dQZEVXbMDoHDwVN2tF&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>playlist_dataframe <span class="ot">&lt;-</span> <span class="fu">get_playlist_audio_features</span>(playlist_username, playlist_uris)</span></code></pre></div>
+<p><br></p>
+<p>Über die Funktion <strong>colnames()</strong> können wir uns nun anschauen, welche Variablen und damit welche Informationen dieser Datensatz enthält. Neben typischen Meta-Daten wie dem Songnamen in der Spalte <strong>track.name</strong>, der URI der einzelnen Songs in der Spalte <strong>track.uri</strong> oder dem Tag, an dem der Song der Playlist hinzugefügt wurde, in der Spalte <strong>added_at</strong>, beinhaltet unser Datensatz unter Anderem Audioanalysen, Links und Informationen über die Länder in denen der Song verfügbar ist.</p>
+<p><br></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(playlist_dataframe)</span></code></pre></div>
+<pre><code>##  [1] &quot;playlist_id&quot;                        &quot;playlist_name&quot;                     
+##  [3] &quot;playlist_img&quot;                       &quot;playlist_owner_name&quot;               
+##  [5] &quot;playlist_owner_id&quot;                  &quot;danceability&quot;                      
+##  [7] &quot;energy&quot;                             &quot;key&quot;                               
+##  [9] &quot;loudness&quot;                           &quot;mode&quot;                              
+## [11] &quot;speechiness&quot;                        &quot;acousticness&quot;                      
+## [13] &quot;instrumentalness&quot;                   &quot;liveness&quot;                          
+## [15] &quot;valence&quot;                            &quot;tempo&quot;                             
+## [17] &quot;track.id&quot;                           &quot;analysis_url&quot;                      
+## [19] &quot;time_signature&quot;                     &quot;added_at&quot;                          
+## [21] &quot;is_local&quot;                           &quot;primary_color&quot;                     
+## [23] &quot;added_by.href&quot;                      &quot;added_by.id&quot;                       
+## [25] &quot;added_by.type&quot;                      &quot;added_by.uri&quot;                      
+## [27] &quot;added_by.external_urls.spotify&quot;     &quot;track.artists&quot;                     
+## [29] &quot;track.available_markets&quot;            &quot;track.disc_number&quot;                 
+## [31] &quot;track.duration_ms&quot;                  &quot;track.episode&quot;                     
+## [33] &quot;track.explicit&quot;                     &quot;track.href&quot;                        
+## [35] &quot;track.is_local&quot;                     &quot;track.name&quot;                        
+## [37] &quot;track.popularity&quot;                   &quot;track.preview_url&quot;                 
+## [39] &quot;track.track&quot;                        &quot;track.track_number&quot;                
+## [41] &quot;track.type&quot;                         &quot;track.uri&quot;                         
+## [43] &quot;track.album.album_type&quot;             &quot;track.album.artists&quot;               
+## [45] &quot;track.album.available_markets&quot;      &quot;track.album.href&quot;                  
+## [47] &quot;track.album.id&quot;                     &quot;track.album.images&quot;                
+## [49] &quot;track.album.name&quot;                   &quot;track.album.release_date&quot;          
+## [51] &quot;track.album.release_date_precision&quot; &quot;track.album.total_tracks&quot;          
+## [53] &quot;track.album.type&quot;                   &quot;track.album.uri&quot;                   
+## [55] &quot;track.album.external_urls.spotify&quot;  &quot;track.external_ids.isrc&quot;           
+## [57] &quot;track.external_urls.spotify&quot;        &quot;video_thumbnail.url&quot;               
+## [59] &quot;key_name&quot;                           &quot;mode_name&quot;                         
+## [61] &quot;key_mode&quot;</code></pre>
+</div>
+<div id="datenbereinigung" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Datenbereinigung</h2>
+<p>Bevor erste Analysen angefertigt werden können, sollte zunächst ein genauerer Blick auf den vorliegenden Datensatz geworfen werden. Um sehen zu können, welche die ersten 5 Songs in der Playlist sind und von welchen Künstler diese Songs können wir folgenden Befehl ausführen:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>playlist_dataframe[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">c</span>(<span class="st">&quot;track.name&quot;</span>,<span class="st">&quot;track.artists&quot;</span>)]</span></code></pre></div>
+<pre><code>## # A tibble: 5 x 2
+##   track.name                                                     track.artists  
+##   &lt;chr&gt;                                                          &lt;list&gt;         
+## 1 Easy On Me                                                     &lt;df[,6] [1 × 6…
+## 2 STAY (with Justin Bieber)                                      &lt;df[,6] [2 × 6…
+## 3 INDUSTRY BABY (feat. Jack Harlow)                              &lt;df[,6] [2 × 6…
+## 4 abcdefu                                                        &lt;df[,6] [1 × 6…
+## 5 All Too Well (10 Minute Version) (Taylor&#39;s Version) (From The… &lt;df[,6] [1 × 6…</code></pre>
+<p>Hier stellen wir jedoch fest, dass der Eintrag in der Spalte <strong>track.artists</strong> für jeden Song aus einem weiteren Dataframe besteht. Zusätzlich sehen wir, dass die Dimensionen dieser Dataframes variieren. Bei genauerer Betrachtung eines solchen Eintrags können wir jedoch feststellen, dass in diesen Dataframes neben dem Künstlernamen auch die URL zum Profil des Künstlers, seine ID und weitere Informationen verborgen sind.</p>
+<p>Um unseren Datensatz besser aufzubereiten, können wir mit der Funktion <strong>map_chr()</strong> aus der Library <strong>purr()</strong> für jede Zeile in unserem Datensatz den ersten Eintrag in der Variable <strong>name</strong> extrahieren und einer neuen Spalte mit dem Titel <strong>main_artist</strong> hinzufügen.</p>
+<p>So können wir nun neben dem Songtitel direkt den Künstlernamen des in den Songdaten zuerst genannten Künstlers erhalten.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>playlist_dataframe<span class="sc">$</span>main_artist <span class="ot">&lt;-</span> <span class="fu">map_chr</span>(playlist_dataframe<span class="sc">$</span>track.artists, <span class="cf">function</span>(x) x<span class="sc">$</span>name[<span class="dv">1</span>])</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>playlist_dataframe[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">c</span>(<span class="st">&quot;track.name&quot;</span>,<span class="st">&quot;main_artist&quot;</span>)]</span></code></pre></div>
+<pre><code>## # A tibble: 5 x 2
+##   track.name                                                        main_artist 
+##   &lt;chr&gt;                                                             &lt;chr&gt;       
+## 1 Easy On Me                                                        Adele       
+## 2 STAY (with Justin Bieber)                                         The Kid LAR…
+## 3 INDUSTRY BABY (feat. Jack Harlow)                                 Lil Nas X   
+## 4 abcdefu                                                           GAYLE       
+## 5 All Too Well (10 Minute Version) (Taylor&#39;s Version) (From The Va… Taylor Swift</code></pre>
+<p>In der Spalte <strong>track.album.release_date</strong> können wir das Erscheinungsdatum der Songs einsehen. Da die in dieser Spalte enthaltenen Werte jedoch das Format <em>character</em> haben und wir uns in den folgenden Analysen eher für das Erscheinungsjahr und nicht für den genauen Tag interessieren, können wir eine neue Spalte für das Erscheinungsjahr anlegen und das Datum in das Format <strong>“%Y”</strong> konvertieren. Wir nennen diese Spalte <strong>release_year</strong>.</p>
+<p><br></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>playlist_dataframe<span class="sc">$</span>release_year <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">as.Date</span>(playlist_dataframe<span class="sc">$</span>track.album.release_date), <span class="at">format=</span><span class="st">&quot;%Y&quot;</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>playlist_dataframe[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">c</span>(<span class="st">&quot;track.name&quot;</span>,<span class="st">&quot;main_artist&quot;</span>,<span class="st">&quot;release_year&quot;</span>)]</span></code></pre></div>
+<pre><code>## # A tibble: 5 x 3
+##   track.name                                           main_artist  release_year
+##   &lt;chr&gt;                                                &lt;chr&gt;        &lt;chr&gt;       
+## 1 Easy On Me                                           Adele        2021        
+## 2 STAY (with Justin Bieber)                            The Kid LAR… 2021        
+## 3 INDUSTRY BABY (feat. Jack Harlow)                    Lil Nas X    2021        
+## 4 abcdefu                                              GAYLE        2021        
+## 5 All Too Well (10 Minute Version) (Taylor&#39;s Version)… Taylor Swift 2021</code></pre>
+<p><br></p>
+<p>Aufgrund des Umfangs unseres Datensatzes besteht außerdem Kürzungspotenzial. Für weitere Analysen könnte man sich nun einen weiteren Datensatz einrichten, der nur die zu untersuchenden Variablen erhält. Um hier jedoch Spielraum für Kreativität zu lassen, sehen wir an dieser Stelle davon ab.</p>
+</div>
+<div id="explorative-datenanalyse" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Explorative Datenanalyse</h2>
+<div id="erscheinungsjahre" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Erscheinungsjahre</h3>
+<p>Da wir bereits eine Spalte für das Erscheinungsjahr erstellt haben, können wir uns nun anschauen, wieviele Songs unserer Playlist aus welchen Jahren stammen.</p>
+<p>Für die Darstellung nutzen wir hier die Library <strong>ggplot2</strong>.</p>
+<p>Mit den Funktionen <strong>labs()</strong> und <strong>geom_text()</strong> können wir das Diagramm beschriften und uns die Summe der Songs pro Jahr über jedem Balken anzeigen lassen.</p>
+<p><br></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>release_year_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(playlist_dataframe, <span class="fu">aes</span>(<span class="at">x=</span>release_year)) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Songs pro Erscheinungsjahr in den Spotify Global Top-50 am 24.11.21:&quot;</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> ..count..), <span class="at">stat =</span> <span class="st">&quot;count&quot;</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&quot;Erscheinungsjahr&quot;</span>, <span class="at">y=</span> <span class="st">&quot;Anzahl der Songs&quot;</span>)  </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>release_year_plot</span></code></pre></div>
+<center>
+<img src="plot-1-releaseyears.png" />
+</center>
+<p><br></p>
+<p>Möchte ich nun wissen, welcher Song es ist, der in 1994 erschienen und dennoch in der heutigen Top-50 Playlist enthalten ist, kann ich dies über den folgenden Befehl erfahren:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>playlist_dataframe[playlist_dataframe<span class="sc">$</span>release_year<span class="sc">==</span><span class="st">&quot;1994&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;track.name&quot;</span>,<span class="st">&quot;main_artist&quot;</span>)]</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   track.name                      main_artist 
+##   &lt;chr&gt;                           &lt;chr&gt;       
+## 1 All I Want for Christmas Is You Mariah Carey
+## 2 &lt;NA&gt;                            &lt;NA&gt;</code></pre>
+<p><br></p>
+</div>
+<div id="audioanalysen" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Audioanalysen</h3>
+<p>In unserem Datensatz befinden sich mehrere Variablen aus den Audioanalysen, die Spotify für jeden einzelnen Song angefertigt hat und zudem im Empfehlungsalgorithmus verwendet. Dazu zählen neben dem <strong>Tempo</strong> (in Schläge pro Minute), der <strong>Tonart</strong> und der <strong>Taktart</strong> auch Werte für die folgenden Aspekte:</p>
+<ul>
+<li><strong>Tanzbarkeit (danceability)</strong> auf einer Skala von 0 bis 1</li>
+<li><strong>Akustik (acousticness)</strong> auf einer Skala von 0 bis 1</li>
+<li><strong>Energie/Kraft (energy)</strong> auf einer Skala von 0 bis 1</li>
+<li><strong>Instrumentalität (instrumentalness)</strong> auf einer Skala von 0 bis 1 - wobei Songs mit Werten über 0.5 als Songs ohne Gesang/Rap vermutet werden</li>
+<li><strong>Liveness</strong> auf einer Skala von 0 bis 1 - wobei ein höherer Wert für eine höhere Wahrscheinlichkeit steht, dass der Song live performed wurde</li>
+<li><strong>Lautheit (loudness)</strong> in Dezibel, typischerweise zwischen -60 und 0 dB</li>
+<li><strong>speechiness</strong> auf einer Skala von 0 bis 1 - als Indikator, ob sich im Song gesprochene Worte befinden</li>
+<li><strong>Valenz (valence)</strong> auf einer Skala von 0 bis 1 - wobei ein höherer Wert für einen positiveren Klang steht</li>
+</ul>
+<p>Um ein paar dieser Aspekte zu untersuchen, bietet sich eine deskriptive Übersicht an. Dabei zeigt sich zum Beispiel, dass Songs in der Top-50 Global Playlist eine eher höhere Tanzbarkeit und eher niedrigere Werte für den Aspekt Akustik aufweisen.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(playlist_dataframe[<span class="fu">c</span>(<span class="st">&quot;danceability&quot;</span>, <span class="st">&quot;liveness&quot;</span>, <span class="st">&quot;speechiness&quot;</span>, <span class="st">&quot;valence&quot;</span>, <span class="st">&quot;energy&quot;</span>, <span class="st">&quot;acousticness&quot;</span>,<span class="st">&quot;tempo&quot;</span>)])</span></code></pre></div>
+<pre><code>##   danceability       liveness        speechiness         valence      
+##  Min.   :0.2340   Min.   :0.02640   Min.   :0.02820   Min.   :0.0849  
+##  1st Qu.:0.5655   1st Qu.:0.08843   1st Qu.:0.03765   1st Qu.:0.3380  
+##  Median :0.6415   Median :0.12000   Median :0.04880   Median :0.5045  
+##  Mean   :0.6263   Mean   :0.18032   Mean   :0.07596   Mean   :0.5047  
+##  3rd Qu.:0.7400   3rd Qu.:0.31950   3rd Qu.:0.08390   3rd Qu.:0.6775  
+##  Max.   :0.8700   Max.   :0.50500   Max.   :0.36300   Max.   :0.9470  
+##      energy        acousticness         tempo      
+##  Min.   :0.1580   Min.   :0.00146   Min.   : 67.2  
+##  1st Qu.:0.5192   1st Qu.:0.04605   1st Qu.: 95.5  
+##  Median :0.6315   Median :0.24800   Median :120.0  
+##  Mean   :0.6121   Mean   :0.30162   Mean   :123.6  
+##  3rd Qu.:0.7368   3rd Qu.:0.49625   3rd Qu.:148.1  
+##  Max.   :0.8930   Max.   :0.90800   Max.   :201.7</code></pre>
+<p>Wir können uns nun beispielsweise anschauen, welche Songs in der Playlist die besonders hohen Werte für die Tanzbarkeit aufweisen. Erneut greifen wir dabei auf die Library <strong>ggplot2</strong> zu, benutzen dieses Mal jedoch auch die Library <strong>dplyr</strong>, um unseren Datensatz gruppieren und filtern zu können.</p>
+<p>Den Filter setzen wir hier auf <em>danceability &gt;= 0.75</em>, um nur Ergebnisse für Songs zu erhalten, deren Tanzbarkeit mindestens 0.75 beträgt. Über die Funktionen <strong>labs()</strong> und <strong>ggtitle</strong> können wir unser Diagramm beschriften. Die Funktion <strong>theme()</strong> ermöglicht es uns, die Beschriftung der x-Achse für eine bessere Lesbarkeit um 90 Grad zu drehen.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>playlist_dataframe <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(danceability) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(danceability <span class="sc">&gt;=</span> <span class="fl">0.75</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> track.name, <span class="at">y =</span> danceability)) <span class="sc">+</span> </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> track.name)) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&quot;Songname&quot;</span>, <span class="at">y=</span> <span class="st">&quot;Danceability&quot;</span>, <span class="at">fill=</span> <span class="st">&quot;Songtitel&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Welche Songs in den Top-50 Global haben die höchste Tanzbarkeit?&quot;</span>, <span class="st">&quot;Songs mit einer danceability &gt;= 0.75&quot;</span>) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
+<center>
+<img src="06_danceabilityplot.png" height="700" />
+</center>
+<p><br></p>
+<p>Möchten wir uns nun anschauen, welche Tonarten in der Playlist vertreten sind, können wir dies mit der Variable <strong>key_mode</strong> und der Funktion <strong>ggplot()</strong>.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>key_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(playlist_dataframe, <span class="fu">aes</span>(<span class="at">x=</span>key_mode)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Anzahl der Songs nach Tonart in den Spotify Global Top-50 am 24.11.21:&quot;</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> ..count..), <span class="at">stat =</span> <span class="st">&quot;count&quot;</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&quot;Tonart&quot;</span>, <span class="at">y=</span> <span class="st">&quot;Anzahl der Songs&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>key_plot</span></code></pre></div>
+<center>
+<img src="plot-2-keys.png" />
+</center>
+<p><br>
+<br></p>
+<p>In vielen Fällen sind die Songs in einer Playlist aufeinander abgestimmt, beispielsweise um ein Genre (<em>Rap Caviar, Electronic Rising, Dance Brandneu</em>), einen Anlass (<em>Partyhymnen, Christmas Hits</em>), eine bestimmte Zeit (<em>All Out 90s</em>) oder Ähnliches abzubilden.</p>
+<p>Ob bewusst oder unbewusst, meistens entscheiden wir uns doch für Playlisten aufgrund ihrer Stimmung. Möchten wir nun wissen, welchen Stimmungen sich die Songs einer Playlist zuordnen lassen und so vielleicht auch mehr über unsere persönlichen Präferenzen herausfinden, können wir die Variablen <strong>energy</strong> und <strong>valence</strong> aus den Audioanalysen verwenden. Spotify defininert die beiden Variablen wie folgt:</p>
+<p><strong>Valence</strong>:<br />
+<em>A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).</em></p>
+<p><strong>Energy</strong>:<br />
+<em>Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.</em></p>
+<p>Mit diesen beiden Variablen können wir also ein Streudiagramm erstellen und in Quadranten einteilen. Dabei können wir festlegen, dass wir Songs mit <strong>hoher Valenz</strong> (<em>happy, cheerful, euphoric</em>) und <strong>hoher Energie</strong> (<em>fast, loud, and noisy</em>) als <strong>Joyful / Happy</strong> bezeichnen würden, während Songs mit <strong>niedriger Valenz</strong> (<em>sad, depressed, angry</em>) und <strong>niedriger Energie</strong> eher <strong>Depressing / Sad</strong> beschrieben werden können.</p>
+<p>Songs mit einer hohen Energie, aber einer niedrigen Valenz können wir als <strong>Angry / Turbulent</strong> und Songs mit einer niedrigen Energie, aber hohen Valenz als <strong>Peace / Chill</strong> beschreiben.</p>
+<p>Mit dem folgenden Code erhalten wir einen emotionalen Quadranten, der uns Aufschluss über die Stimmung unserer ausgewählten Playlist gibt.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>emotionalQuadrant <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> playlist_dataframe, <span class="fu">aes</span>(<span class="at">x =</span> valence, <span class="at">y =</span> energy)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">size =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="fl">0.25</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="fl">0.95</span>, <span class="at">label =</span> <span class="st">&quot;Angry / Turbulent&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="fl">1.75</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="fl">0.95</span>, <span class="at">label =</span> <span class="st">&quot;Joyful / Happy&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="fl">1.75</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="fl">0.05</span>, <span class="at">label =</span> <span class="st">&quot;Peace / Chill&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="fl">0.25</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="fl">0.05</span>, <span class="at">label =</span> <span class="st">&quot;Depressing / Sad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&quot;Valence&quot;</span>, <span class="at">y=</span> <span class="st">&quot;Energy&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Emotional quadrant of chosen playlist&quot;</span>, <span class="st">&quot;Based on energy and valence&quot;</span>)  </span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>emotionalQuadrant</span></code></pre></div>
+<center>
+<img src="plot-3-quadrant1.png" />
+</center>
+
+</div>
+</div>
+</div>
+<div id="artist-analysen" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Artist Analysen</h1>
+<p>Für Daten zu Künstlern bietet <strong>spotifyr</strong> ebenfalls eine Vielzahl an Funktionen. Diese umfassen unter anderem:</p>
+<ul>
+<li><strong>get_artist_audio_features()</strong> - für die Audio-Analysen der gesamten Diskographie</li>
+<li><strong>get_artist_albums()</strong> - für Meta-Informationen des Katalogs</li>
+<li><strong>get_artist_top_tracks()</strong> - für die Top-Songs des Künstlers innerhalb eines bestimmten Marktes/Land<br />
+</li>
+<li><strong>get_related_artists()</strong> - für Informationen über ähnliche Künstler, basierend auf dem vergangenen Hörverhalten der Spotify-Nutzer</li>
+</ul>
+<div id="related-artists" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Related Artists</h2>
+<p>Um zu untersuchen, welche Artists basierend auf dem Hörverhalten der Spotify-Nutzer mit einem von uns gewählten Artists in Verbindung stehen, benötigen wir lediglich die <strong>ID</strong> des Artists.</p>
+<p>Diese können wir entweder wie bei den Playlisten aus dem Link des Artistprofils über Spotify kopieren oder sie aus den <strong>artist audio features</strong> ziehen, für die wir lediglich den Namen benötigen. Wir können also die Funktion <strong>get_artist_audio_features()</strong> auf einen beliebigen Namen anwenden und die Spalte <strong>artist_id</strong> abrufen. Da unser Datensatz <strong>artist_data</strong> jedoch aus allen Songs des Artists besteht und wir die ID nur einmal benötigen, müssen wir durch die Erweiterung <strong>[1]</strong> den Eintrag in der ersten Zeile wählen.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>artist_data <span class="ot">&lt;-</span> <span class="fu">get_artist_audio_features</span>(<span class="at">artist=</span><span class="st">&quot;Travis Scott&quot;</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>artist_data<span class="sc">$</span>artist_id[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;0Y5tJX1MQlPlqiwlOH1tJY&quot;</code></pre>
+<p>Nun können wir die <strong>artist_id</strong> für die Funktion <strong>get_related_artists()</strong> nutzen und erhalten einen Datensatz mit Informationen zu den aufgrund von Nutzungsdaten der Spotify-User ähnlichen Künstlern.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>related_artists <span class="ot">&lt;-</span> <span class="fu">get_related_artists</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  artist_data<span class="sc">$</span>artist_id[<span class="dv">1</span>],</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">include_meta_info =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>related_artists<span class="sc">$</span>name</span></code></pre></div>
+<pre><code>##  [1] &quot;A$AP Rocky&quot;        &quot;Chief Keef&quot;        &quot;Joey Bada$$&quot;      
+##  [4] &quot;A$AP Ferg&quot;         &quot;Playboi Carti&quot;     &quot;Huncho Jack&quot;      
+##  [7] &quot;Pusha T&quot;           &quot;Kendrick Lamar&quot;    &quot;A$AP Mob&quot;         
+## [10] &quot;Chance the Rapper&quot; &quot;Meek Mill&quot;         &quot;Metro Boomin&quot;     
+## [13] &quot;ScHoolboy Q&quot;       &quot;Kodak Black&quot;       &quot;Young Nudy&quot;       
+## [16] &quot;Gunna&quot;             &quot;Quavo&quot;             &quot;Lil Uzi Vert&quot;     
+## [19] &quot;Childish Gambino&quot;  &quot;Migos&quot;</code></pre>
+<p>Aus unserem neuen <strong>related_artists</strong> Datensatz können wir zudem die <strong>popularity</strong> der Künstler entnehmen und mit dem folgenden Code vergleichbar darstellen.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>related_artists_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(related_artists, <span class="fu">aes</span>(<span class="at">x=</span>name, <span class="at">y=</span>popularity)) <span class="sc">+</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span>  <span class="co"># Y axis is explicit. &#39;stat=identity&#39;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> name), <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&quot;Artist&quot;</span>, <span class="at">y=</span> <span class="st">&quot;Popularity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Wie populär sind Künstler die Spotify mit Travis Scott assoziiert?&quot;</span>,<span class="st">&quot;Basierend auf dem Hörverhalten der Spotify User&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>related_artists_plot</span></code></pre></div>
+<center>
+<img src="plot-4-relatedartists.png" />
+</center>
+</div>
+<div id="artist-vergleich" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Artist Vergleich</h2>
+<p>Möchten wir nun beliebig viele Artists mit Hilfe der Funktion <strong>get_artist_audio_features</strong> miteinander vergleichen, können wir uns einfach eine Liste beliebiger Artists erstellen und die Funktion in einer <strong>for-Schleife</strong> anwenden.</p>
+<p>Vor der Schleife generieren wir zunächst einen leeren Datensatz mit dem Namen <strong>artist_comparison</strong>. In der for-Schleife führen wir dann solange die folgenden Aktionen durch, bis jeder Eintrag in unserer <strong>artist_names</strong>-Liste verwendet worden ist.</p>
+<p>Mit dem Befehl <strong>for (i in 1:length(artist_names))</strong> sagen wir also, dass die darauf folgenden Aktionen für jede Nummer <strong>i</strong> in dem Intervall von 1 bis 5 (also der Anzahl der Einträge in unserer artist_names Liste) durchgeführt werden sollen.</p>
+<p>Die Aktionen, die wir dann für jede Nummer von 1 bis 5 durchführen umfassen:</p>
+<ul>
+<li>die Erstellung des Datensatzes <strong>artist_data</strong> mit der Funktion <strong>get_artist_audio_features</strong> für den jeweiligen Artist aus unserer Liste<br />
+</li>
+<li>das Zusammenfügen unseres <strong>artist_comparison</strong> Datensatzes mit dem neuen <strong>artist_data</strong> Datensatz<br />
+</li>
+<li>das Ausgeben des Künstlernamens des im jeweiligen Durchlauf verwendeten Artists. Diese Ausgabe dient nur zu dem Zweck, den Fortschritt unserer Schleife zu überprüfen</li>
+</ul>
+<p>Zusammengefasst nimmt unsere for-Schleife also jedes Mal einen Artistnamen, verwendet ihn für die <strong>get_artist_audio_features</strong> Funktion und fügt die neuen künstlerspezifischen Daten unserem gesamten <strong>artist_comparison</strong> Datensatz hinzu.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>artist_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Adele&quot;</span>,<span class="st">&quot;The Weeknd&quot;</span>, <span class="st">&quot;Billie Eilish&quot;</span>, <span class="st">&quot;Skrillex&quot;</span>, <span class="st">&quot;Dua Lipa&quot;</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>artist_comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(artist_names)) {</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  artist_data <span class="ot">&lt;-</span> <span class="fu">get_artist_audio_features</span>(<span class="at">artist=</span> artist_names[i])</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  artist_comparison <span class="ot">&lt;-</span> <span class="fu">rbind</span>(artist_comparison, artist_data)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(artist_names[i])</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Nun können wir wie zuvor bei den Playlisten verschiedene Analysen zu den von uns gewählten Artists durchführen. So können wir beispielsweise erneut einen <strong>emotionalen Qudaranten</strong> erstellen und diesmal farblich zwischen den Artists unterscheiden.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>emotionalQuadrant_top_artists <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> artist_comparison, <span class="fu">aes</span>(<span class="at">x =</span> valence, <span class="at">y =</span> energy, <span class="at">color =</span> artist_name)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">size =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="fl">0.25</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="fl">0.95</span>, <span class="at">label =</span> <span class="st">&quot;Angry / Turbulent&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="fl">1.75</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="fl">0.95</span>, <span class="at">label =</span> <span class="st">&quot;Joyful / Happy&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="fl">1.75</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="fl">0.05</span>, <span class="at">label =</span> <span class="st">&quot;Peace / Chill&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="fl">0.25</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="fl">0.05</span>, <span class="at">label =</span> <span class="st">&quot;Depressing / Sad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&quot;Valence&quot;</span>, <span class="at">y=</span> <span class="st">&quot;Energy&quot;</span>, <span class="at">color =</span> <span class="st">&quot;Artist&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Emotional quadrant of selected artists&quot;</span>, <span class="st">&quot;Based on energy and valence&quot;</span>)  </span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>emotionalQuadrant_top_artists</span></code></pre></div>
+<center>
+<img src="plot-5-quadrant2.png" />
+</center>
+
+</div>
+</div>
+<div id="album-analysen" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Album Analysen</h1>
+<p>Eine weitere Möglichkeit die uns das <strong>spotifyr</strong> Package bietet ist die Analyse von Alben. Hierzu können unter anderem folgende Funktionen genutzt werden:</p>
+<ul>
+<li><strong>get_artist_albums</strong> - Um den Katalog eines oder mehrerer Artists zu erhalten<br />
+</li>
+<li><strong>get_albums</strong> - Um Informationen zu Alben mithilfe ihrer ID zu erhalten<br />
+</li>
+<li><strong>get_album_tracks</strong> - Um Informationen zu den Songs innerhalb bestimmter Alben zu erhalten</li>
+</ul>
+<div id="album-vergleich" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Album Vergleich</h2>
+<p>Durch eine Kombination der Funktionen <strong>get_album_tracks</strong> und <strong>get_track_audio_features</strong> können wir so beispielsweise Alben anhand der Audio-Features der enthaltenen Tracks vergleichen.</p>
+<p>Vergleichen wir als Beispiel mal das Album <em>Astroworld</em> von <em>Travis Scott</em> mit dem Album <em>Views</em> von <em>Drake</em>.<br />
+Im Folgenden erstellen wir also zunächst über <strong>get_album_tracks</strong> einen Datensatz mit Informationen über die Songs im Album <em>Astroworld</em> von <em>Travis Scott</em> anhand der <strong>URI</strong> des Albums. Wir nennen diesen Datensatz <strong>astroworld_tracks</strong>.</p>
+<p>Anschließend erstellen wir einen Datensatz mit dem Titel <strong>astroworld</strong> und benutzen eine <strong>for-Schleife</strong>, um ihn mit den Audio-Features der Songs, die wir durch die Funktion <strong>get_track_audio_features</strong> und die <strong>ID</strong> der Songs befüllen können. Die <strong>ID</strong> der Songs befindet sich logischerweise in der Spalte <strong>ID</strong> in unserem <strong>astroworld_tracks</strong> Datensatz.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>astroworld_tracks <span class="ot">&lt;-</span> <span class="fu">get_album_tracks</span>(<span class="st">&quot;41GuZcammIkupMPKH2OJ6I&quot;</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>astroworld <span class="ot">&lt;-</span><span class="fu">data.frame</span>()</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(astroworld_tracks)) {</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  track_data <span class="ot">&lt;-</span> <span class="fu">get_track_audio_features</span>(astroworld_tracks<span class="sc">$</span>id[i])</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  astroworld <span class="ot">&lt;-</span> <span class="fu">rbind</span>(astroworld, track_data)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Request failed [503]. Retrying in 1 seconds...</code></pre>
+<p>Um die Tracks später in einem Datensatz mit unserem zweiten Album weiterhin <em>Astroworld</em> zuordnen zu können, fügen wir noch eine Spalte mit dem Namen <strong>album</strong> und dem Eintrag <strong>"Astroworld</strong> hinzu.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>astroworld<span class="sc">$</span>album <span class="ot">&lt;-</span> <span class="st">&quot;Astroworld&quot;</span></span></code></pre></div>
+<p>Nun wiederholen wir die Schritte für das Album <em>Views</em>. Hierfür benötigen wir erneut nur die <strong>URI</strong> des Albums.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>views_tracks <span class="ot">&lt;-</span> <span class="fu">get_album_tracks</span>(<span class="st">&quot;40GMAhriYJRO1rsY4YdrZb&quot;</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>views <span class="ot">&lt;-</span><span class="fu">data.frame</span>()</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(views_tracks)) {</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  track_data <span class="ot">&lt;-</span> <span class="fu">get_track_audio_features</span>(views_tracks<span class="sc">$</span>id[i])</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  views <span class="ot">&lt;-</span> <span class="fu">rbind</span>(views, track_data)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Request failed [429]. Retrying in 1 seconds...</code></pre>
+<p>Auch unseren <strong>views</strong> Datensatz müssen wir noch entsprechend des Albumtitels labeln.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>views<span class="sc">$</span>album <span class="ot">&lt;-</span> <span class="st">&quot;Views&quot;</span></span></code></pre></div>
+<p>Anschließend können wir die beiden Album-Datensätze zu einem neuen Datensatz mit dem Titel <strong>album_comparison</strong> vereinen.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>album_comparison <span class="ot">&lt;-</span> <span class="fu">rbind</span>(astroworld, views)</span></code></pre></div>
+<p>Die von uns hinzugefügten <strong>album</strong> Spalten, ermöglichen es uns nun die Audio-Features der Alben zu vergleichen. So wie im Kapitel <strong>2.3.2 Audioanalysen</strong> stehen uns dafür verschiedene Variablen wie <strong>energy</strong> oder <strong>valence</strong> zur Verfügung.</p>
+<p>So können wir zum Beispiel erneut einen <strong>emotional Quadrant</strong> anfertigen und die Stimmung der Songs unserer Alben vergleichen.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>emotionalQuadrant <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> album_comparison, <span class="fu">aes</span>(<span class="at">x =</span> valence, <span class="at">y =</span> energy, <span class="at">color =</span> album)) <span class="sc">+</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="fl">0.25</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="fl">0.95</span>, <span class="at">label =</span> <span class="st">&quot;Angry / Turbulent&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="fl">1.75</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="fl">0.95</span>, <span class="at">label =</span> <span class="st">&quot;Joyful / Happy&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="fl">1.75</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="fl">0.05</span>, <span class="at">label =</span> <span class="st">&quot;Peace / Chill&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="fl">0.25</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="fl">0.05</span>, <span class="at">label =</span> <span class="st">&quot;Depressing / Sad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&quot;Valence&quot;</span>, <span class="at">y=</span> <span class="st">&quot;Energy&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Emotional comparison of Travis Scott - Astroworld and Drake - Views&quot;</span>, <span class="st">&quot;Based on energy y valence&quot;</span>)  </span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>emotionalQuadrant</span></code></pre></div>
+<center>
+<img src="plot-6-quadrant3.png" />
+</center>
+
+</div>
+</div>
+<div id="weitere-ressourcen" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Weitere Ressourcen</h1>
+<p>Hilfestellungen / Dokumentationen:</p>
+<ul>
+<li><p><a href="https://developer.spotify.com/documentation/web-api/reference/#/">Spotify API Dokumentation</a></p></li>
+<li><p><a href="https://www.rdocumentation.org/packages/spotifyr/versions/2.2.1">Spotifyr Package Dokumentation</a></p></li>
+<li><p><a href="https://towardsdatascience.com/explore-your-activity-on-spotify-with-r-and-spotifyr-how-to-analyze-and-visualize-your-stream-dee41cb63526">Ursprünglicher towards data science Artikel zur Spotify API / spotifyr - Inspiration für dieses Tutorial</a></p></li>
+</ul>
+<p>Weitere Learnings/Tutorials:</p>
+<ul>
+<li><p><a href="https://www.youtube.com/watch?v=Mey3ZGNsnMY">Introduction to Accessing Spotify API in R</a></p></li>
+<li><p><a href="https://www.youtube.com/watch?v=goUzHd7cTuA">Hackathon Talk “Audio Analysis with the Spotify Web API”</a> - beinhaltet auch Hintergrundinformationen zu den Berehcnungen der Audioanalyse-Features</p></li>
+</ul>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toc_float": {
+"collapsed": false
+},
+"toc_depth": 3
+});
+});
+</script>
+
+</body>
+
+</html>
